@@ -1,0 +1,15 @@
+target
+Thumbs.db
+
+.metadata
+.settings
+.classpath
+.project
+*.pdb
+*.log
+*.log.*
+.bpmn
+.DS_Store
+
+*.iml
+.idea
