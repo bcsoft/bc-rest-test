@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>cn.bc.rest</groupId>
 		<artifactId>bc-rest-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>bc-rest-test</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>bc-rest-test</name>
 
 	<dependencies>
