@@ -4,17 +4,17 @@
 	<parent>
 		<groupId>cn.bc.rest</groupId>
 		<artifactId>bc-rest-parent</artifactId>
-		<version>1.1-SNAPSHOT</version>
-		<relativePath></relativePath>
+		<version>${revision}</version>
+		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>bc-rest-test</artifactId>
 	<name>bc-rest-test</name>
 	<packaging>jar</packaging>
+	<description>BC Rest Test</description>
 	<dependencies>
 		<dependency>
 			<groupId>cn.bc.rest</groupId>
 			<artifactId>bc-rest-core</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 	<profiles>
