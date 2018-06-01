@@ -16,35 +16,35 @@ import javax.ws.rs.core.Application;
  */
 @Deprecated
 public abstract class ClassicalJerseySpringTest extends JerseyTest {
-	@Override
-	protected Application configure() {
-		ResourceConfig rc = new ResourceConfig();
-		set(TestProperties.CONTAINER_PORT, "9998");    // 设置服务器端口
+  @Override
+  protected Application configure() {
+    ResourceConfig rc = new ResourceConfig();
+    set(TestProperties.CONTAINER_PORT, "9998");    // 设置服务器端口
 
-		enable(TestProperties.LOG_TRAFFIC);            // 这个可以让请求、相应的东西一览无余
-		enable(TestProperties.DUMP_ENTITY);
+    enable(TestProperties.LOG_TRAFFIC);            // 这个可以让请求、相应的东西一览无余
+    enable(TestProperties.DUMP_ENTITY);
 
-		// 1. spring 配置（需依赖 jersey-spring3 包）
-		// 1.1 设置 spring 配置文件的位置
-		rc.property("contextConfigLocation", getSpringContextConfigLocation());
+    // 1. spring 配置（需依赖 jersey-spring3 包）
+    // 1.1 设置 spring 配置文件的位置
+    rc.property("contextConfigLocation", getSpringContextConfigLocation());
 
-		// 1.2 注册 spring 上下文监听器（引入 jersey-spring3 后自动注册）
-		//rc.register(SpringLifecycleListener.class);
-		//rc.register(RequestContextFilter.class);
+    // 1.2 注册 spring 上下文监听器（引入 jersey-spring3 后自动注册）
+    //rc.register(SpringLifecycleListener.class);
+    //rc.register(RequestContextFilter.class);
 
-		// 2. 注册要测试的资源类|包
-		initResourceConfig(rc);
+    // 2. 注册要测试的资源类|包
+    initResourceConfig(rc);
 
-		return rc;
-	}
+    return rc;
+  }
 
-	protected String getSpringContextConfigLocation() {
-		return "spring-test.xml";
-	}
+  protected String getSpringContextConfigLocation() {
+    return "spring-test.xml";
+  }
 
-	protected void initResourceConfig(ResourceConfig rc) {
-		rc.setApplicationName("rest");
-		rc.packages("cn.bc");               // 默认注册 cn.bc 包
-		//rc.register(DemoResource.class);  // 注册资源类
-	}
+  protected void initResourceConfig(ResourceConfig rc) {
+    rc.setApplicationName("rest");
+    rc.packages("cn.bc");               // 默认注册 cn.bc 包
+    //rc.register(DemoResource.class);  // 注册资源类
+  }
 }
