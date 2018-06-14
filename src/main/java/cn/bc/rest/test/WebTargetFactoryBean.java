@@ -1,6 +1,6 @@
 package cn.bc.rest.test;
 
-import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
@@ -125,7 +125,14 @@ public class WebTargetFactoryBean implements FactoryBean<WebTarget>, Initializin
 
     // 注册日志功能，不需要可以去掉: org.glassfish.jersey.logging.LoggingFeature
     //rc.register(LoggingFilter.class);// 仅打印请求响应的 header、URL
-    rc.register(new LoggingFilter(java.util.logging.Logger.getLogger(LoggingFilter.class.getName()), true)); // 打印请求响应的body
+    //rc.register(new LoggingFilter(java.util.logging.Logger.getLogger(LoggingFilter.class.getName()), true)); // 打印请求响应的body
+    if (logger.isDebugEnabled()) {
+      // 打印请求响应的 body (for jersey2.26+)
+      // see https://github.com/swagger-api/swagger-codegen/issues/6715
+      // see https://github.com/swagger-api/swagger-codegen/commit/2d19776caf4c06cf98627b5a2a228af9a82346b7
+      rc.register(new LoggingFeature(java.util.logging.Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),
+        java.util.logging.Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 1024 * 50 /* Log payloads up to 50K */));
+    }
     //rc.register(LoggingFeature.class); // LoggingFeature 测试不成功 2016-07-29 by dragon
     //rc.property(LoggingFeature.DEFAULT_LOGGER_LEVEL, Level.FINEST.getName());
     //rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL, Level.FINEST.getName());
